@@ -12,7 +12,7 @@ class CounterState extends Equatable {
   }) =>
       CounterState(
         counter: counter ?? this.counter,
-        transactionCount: transactionCount ?? this.counter,
+        transactionCount: transactionCount ?? this.transactionCount,
       );
 
   @override
