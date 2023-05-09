@@ -13,7 +13,11 @@ class RegisterCubit extends Cubit<RegisterFormState> {
         formStatus: FormStatus.validating,
         username: Username.dirty(state.username.value),
         password: Password.dirty(state.password.value),
-        isValid: Formz.validate([state.username, state.password])));
+        isValid: Formz.validate([
+          state.username,
+          //TODO: state.email,
+          state.password
+        ])));
 
     print('Cubit Submit: $state');
   }
