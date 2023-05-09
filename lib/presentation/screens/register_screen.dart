@@ -32,7 +32,10 @@ class _RegisterView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: const [
               FlutterLogo(
-                size: 100,
+                size: 150,
+              ),
+              SizedBox(
+                height: 20,
               ),
               _RegisterForm(),
               SizedBox(
@@ -50,36 +53,81 @@ class _RegisterView extends StatelessWidget {
 //----------------------- _registerForm ----------------------
 //------------------------------------------------------------
 
-class _RegisterForm extends StatelessWidget {
+class _RegisterForm extends StatefulWidget {
   const _RegisterForm();
+
+  @override
+  State<_RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<_RegisterForm> {
+  final GlobalKey<FormState> _keyForm = GlobalKey();
+  String userName = '';
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
     return Form(
+        key: _keyForm,
         child: Column(
-      children: [
-        const CustomTextFormField(
-          label: 'Nombre del Usuario',
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        const CustomTextFormField(
-          label: 'Correo electrónico',
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const CustomTextFormField(
-          label: 'Contraseña',
-          obscureText: true,
-        ),
-        FilledButton.tonalIcon(
-          onPressed: () {},
-          icon: const Icon(Icons.save),
-          label: const Text('Crear Usuario'),
-        ),
-      ],
-    ));
+          children: [
+            CustomTextFormField(
+              label: 'Nombre del Usuario',
+              validator: (value) {
+                if (value == null || value.isEmpty) return 'Campo requerido';
+                if (value.trim().isEmpty) return 'Campo requerido';
+                if (value.trim().length < 6) return 'Más de 6 letras';
+                return null;
+              },
+              onChanged: (value) => userName = value,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            CustomTextFormField(
+              label: 'Correo electrónico',
+              onChanged: (value) => email = value,
+              validator: (value) {
+                if (value == null || value.isEmpty) return 'Campo requerido';
+                if (value.trim().isEmpty) return 'Campo requerido';
+                final emailRegExp = RegExp(
+                  r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                );
+                if (!emailRegExp.hasMatch(value)) {
+                  return 'No tiene formato de correo';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomTextFormField(
+              label: 'Contraseña',
+              validator: (value) {
+                if (value == null || value.isEmpty) return 'Campo requerido';
+                if (value.trim().isEmpty) return 'Campo requerido';
+                if (value.trim().length < 6) return 'Más de 6 letras';
+                return null;
+              },
+              onChanged: (value) => password = value,
+              obscureText: true,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FilledButton.tonalIcon(
+              icon: const Icon(Icons.save),
+              label: const Text('Crear Usuario'),
+              onPressed: () {
+                bool isValid = _keyForm.currentState!.validate();
+                if (!isValid) return;
+                print(
+                    'username: $userName - email: $email - password: $password');
+              },
+            ),
+          ],
+        ));
   }
 }
