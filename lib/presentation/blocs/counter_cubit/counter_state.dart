@@ -6,13 +6,14 @@ class CounterState extends Equatable {
 
   const CounterState({this.counter = 0, this.transactionCount = 0});
 
-  copyWith({
+  CounterState copyWith({
     int? counter,
     int? transactionCount,
   }) =>
       CounterState(
-          counter: counter ?? this.counter,
-          transactionCount: transactionCount ?? this.transactionCount);
+        counter: counter ?? this.counter,
+        transactionCount: transactionCount ?? this.transactionCount,
+      );
 
   @override
   List<Object> get props => [counter, transactionCount];
