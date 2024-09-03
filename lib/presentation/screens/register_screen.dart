@@ -72,24 +72,27 @@ class _RegisterForm extends StatelessWidget {
           CustomTextFormField(
               label: 'Nombre del Usuario',
               errorMessage: username.errorMessage,
+              prefixIcon: Icons.person,
               onChanged: (value) {
                 registerCubit.usernameChanged(value);
               }),
           const SizedBox(
-            height: 10,
+            height: 30,
           ),
           CustomTextFormField(
               label: 'Correo electrónico',
               errorMessage: email.errorMessage,
+              prefixIcon: Icons.email,
               onChanged: (value) {
                 registerCubit.emailChanged(value);
               }),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           CustomTextFormField(
             label: 'Contraseña',
             errorMessage: password.errorMessage,
+            prefixIcon: Icons.password,
             onChanged: (value) {
               registerCubit.passwordChanged(value);
             },
