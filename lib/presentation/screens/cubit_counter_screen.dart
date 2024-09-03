@@ -9,7 +9,7 @@ class CubitCounterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CounterCubit(),
-      child: _CubitCounterView(),
+      child: const _CubitCounterView(),
     );
   }
 }
@@ -18,9 +18,7 @@ class CubitCounterScreen extends StatelessWidget {
 //------------------- _CubitCounterView -------------------
 //---------------------------------------------------------
 class _CubitCounterView extends StatelessWidget {
-  const _CubitCounterView({
-    super.key,
-  });
+  const _CubitCounterView();
 
   void increaseCounterBy(BuildContext context, [int value = 1]) {
     context.read<CounterCubit>().increaseBy(value);
@@ -45,7 +43,7 @@ class _CubitCounterView extends StatelessWidget {
       body: Center(
         child: BlocBuilder<CounterCubit, CounterState>(
           builder: (context, state) {
-            print('Estado cambió');
+            //print('Estado cambió');
             return Text('Counter value: ${state.counter}');
           },
         ),
@@ -65,9 +63,7 @@ class _CubitCounterView extends StatelessWidget {
           ),
           FloatingActionButton(
             heroTag: 2,
-            onPressed: () {
-              increaseCounterBy(context, 2);
-            },
+            onPressed: () => increaseCounterBy(context, 2),
             child: const Text('+2'),
           ),
           const SizedBox(

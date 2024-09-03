@@ -6,7 +6,7 @@ import 'package:formz/formz.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterFormState> {
-  RegisterCubit() : super(RegisterFormState());
+  RegisterCubit() : super(const RegisterFormState());
 
   void onSubmit() {
     emit(state.copyWith(
@@ -17,7 +17,7 @@ class RegisterCubit extends Cubit<RegisterFormState> {
         isValid:
             Formz.validate([state.username, state.email, state.password])));
 
-    print('Cubit Submit: $state');
+    //print('Cubit Submit: $state');
   }
 
   void usernameChanged(String value) {

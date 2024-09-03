@@ -7,7 +7,8 @@ class BlocCounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (_) => CounterBloc(), child: BlocCounterView());
+    return BlocProvider(
+        create: (_) => CounterBloc(), child: const BlocCounterView());
   }
 }
 
@@ -30,7 +31,7 @@ class BlocCounterView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: context.select((CounterBloc counterBloc) =>
-            Text('BLoc Counter: ${counterBloc.state.transactionCount}')),
+            Text('Bloc Counter: ${counterBloc.state.transactionCount}')),
         centerTitle: true,
         actions: [
           IconButton(
